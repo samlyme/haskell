@@ -25,6 +25,15 @@ p_ = Structure . el "p" . escape
 h1_ :: String -> Structure
 h1_ = Structure . el "h1" . escape
 
+code_ :: String -> Structure
+code_ = Structure . el "pre" . escape
+
+ul_ :: [Structure] -> Structure
+ul_ = Structure . el "ul" . concatMap (el "li" . getStructureString)
+
+ol_ :: [Structure] -> Structure
+ol_ = Structure . el "ol" . concatMap (el "li" . getStructureString)
+
 el :: String -> String -> String
 el tag content =
   "<" <> tag <> ">" <> content <> "</" <> tag <> ">"
