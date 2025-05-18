@@ -10,7 +10,7 @@ page =
   html_
     "my title"
     ( append_
-        (h1_ "urmom")
+        (h1_ "<p> broken!")
         ( append_
             (p_ "p1")
             (p_ "p2")
