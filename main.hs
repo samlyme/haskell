@@ -10,9 +10,14 @@ page =
   html_
     "my title"
     ( append_
-        (h1_ "<p> broken!")
+        (code_ "print('hello world')")
         ( append_
             (p_ "p1")
-            (ul_ [p_ "list", p_ "lmao"])
+            ( ul_
+                [ p_ "list",
+                  p_ "lmao",
+                  ol_ [p_ "ordered", p_ "lol"]
+                ]
+            )
         )
     )

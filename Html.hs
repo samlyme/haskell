@@ -4,6 +4,8 @@ module Html
     Structure,
     html_,
     ul_,
+    ol_,
+    code_,
     p_,
     h1_,
     append_,
