@@ -1,5 +1,6 @@
 {-# OPTIONS_GHC -Wmissing-signatures #-}
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+
 {-# HLINT ignore "Use concatMap" #-}
 
 module Html.Internal where
@@ -20,6 +21,11 @@ html_ title content =
         )
     )
 
+ul_ :: [Structure] -> Structure
+ul_ =
+  let li_ = el "li"
+   in Structure . el "ul" . concat . map (li_ . getStructureString)
+
 p_ :: String -> Structure
 p_ = Structure . el "p" . escape
 
@@ -37,17 +43,15 @@ getStructureString (Structure str) = str
 
 escape :: [Char] -> [Char]
 escape =
-  let 
-    escapeChar c = 
-      case c of
-        '<' -> "&lt;"
-        '>' -> "&gt;"
-        '&' -> "&amp;"
-        '"' -> "&quot;"
-        '\'' -> "&#39;"
-        _ -> [c]
-  in
-    concat . map escapeChar
+  let escapeChar c =
+        case c of
+          '<' -> "&lt;"
+          '>' -> "&gt;"
+          '&' -> "&amp;"
+          '"' -> "&quot;"
+          '\'' -> "&#39;"
+          _ -> [c]
+   in concat . map escapeChar
 
 append_ :: Structure -> Structure -> Structure
 append_ (Structure a) (Structure b) = Structure (a <> b)

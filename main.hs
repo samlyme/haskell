@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -Wmissing-signatures #-}
 
-import Html (Html, append_, h1_, html_, p_, render)
+import Html
 
 main :: IO ()
 main = writeFile "build/index.html" (render page)
@@ -13,6 +13,6 @@ page =
         (h1_ "<p> broken!")
         ( append_
             (p_ "p1")
-            (p_ "p2")
+            (ul_ [p_ "list", p_ "lmao"])
         )
     )
