@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -Wmissing-signatures #-}
 
-import Html ( Html, html_, p_, h1_, append_, render )
+import Html (Html, append_, h1_, html_, p_, render)
 
 main :: IO ()
 main = writeFile "build/index.html" (render page)
