@@ -15,11 +15,20 @@ data Structure
   | OrderedList [String]
   | CodeBlock [String]
 
-example1 = Paragraph "Hello, world!"
+parse :: String -> Document
+parse = parseLines [] . lines -- (1)
 
-example2 = [Heading 1 "Welcome", Paragraph "To this tutorial about Haskell."]
+parseLines :: [String] -> [String] -> Document
+parseLines currentParagraph txts =
+  let
+    paragraph = Paragraph (unlines (reverse currentParagraph)) -- (2), (3)
+  in
+    case txts of
+      [] -> [paragraph]
+      currentLine : rest -> 
+        if trim currentLine == ""
+          then paragraph : parseLines [] rest
+          else parseLines (currentLine : currentParagraph) rest
 
-example3 =
-  [ Paragraph "Remember that multiple lines with no separation are grouped together into a single paragraph but list items remain separate.",
-    OrderedList ["Item 1 of a list", "Iem 2 of the same list"]
-  ]
+trim :: String -> String
+trim = unwords . words
