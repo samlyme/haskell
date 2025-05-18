@@ -26,10 +26,11 @@ ul_ =
   let li_ = el "li"
    in Structure . el "ul" . concat . map (li_ . getStructureString)
 
+-- Same behavior
 ol_ :: [Structure] -> Structure
-ol_ =
+ol_ items =
   let li_ = el "li"
-   in Structure . el "ol" . concat . map (li_ . getStructureString)
+   in Structure (el "ol" (concat (map (li_ . getStructureString) items)))
 
 code_ :: [Char] -> Structure
 code_ = Structure . el "pre" . escape
