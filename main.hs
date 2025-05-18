@@ -3,7 +3,7 @@
 import Html ( Html, html_, p_, h1_, append_, render )
 
 main :: IO ()
-main = putStrLn (render page)
+main = writeFile "build/index.html" (render page)
 
 page :: Html
 page =
