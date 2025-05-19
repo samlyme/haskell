@@ -62,8 +62,10 @@ escape =
           _ -> [c]
    in concat . map escapeChar
 
-append_ :: Structure -> Structure -> Structure
-append_ (Structure a) (Structure b) = Structure (a <> b)
+instance Semigroup Structure where
+  (<>) :: Structure -> Structure -> Structure
+  (<>) a b =
+    Structure (getStructureString a <> getStructureString b)
 
 render :: Html -> String
 render (Html a) = a
