@@ -14,6 +14,12 @@ data Structure
   | UnorderedList [String]
   | OrderedList [String]
   | CodeBlock [String]
+  deriving Show
+
+main :: IO ()
+main = do
+  contents <- readFile "./example/example.txt"
+  print (parse contents)
 
 parse :: String -> Document
 parse = parseLines [] . lines -- (1)
@@ -25,7 +31,7 @@ parseLines currentParagraph txts =
   in
     case txts of
       [] -> [paragraph]
-      currentLine : rest -> 
+      currentLine : rest ->
         if trim currentLine == ""
           then paragraph : parseLines [] rest
           else parseLines (currentLine : currentParagraph) rest
